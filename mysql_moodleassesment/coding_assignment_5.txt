@@ -1,0 +1,111 @@
+mysql> create table sailor(
+    -> SID int primary key,
+    -> NAME varchar(20) not null,
+    -> DOB date,
+    -> gender char(1),
+    -> check(gender in ('M','F')));
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> insert into sailor values(101,'Tharani','1998-03-16','F');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into sailor values(102,'Thiru','1992-05-23','M');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into sailor values(103,'Dhakshina','2006-09-13','M');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into sailor values(104,'lakshmi','2008-07-06','F');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into sailor values(105,'venkat','2003-02-16','M');
+Query OK, 1 row affected (0.00 sec)
+
+
+
+mysql> select * from sailor;
++-----+-----------+------------+--------+
+| SID | NAME      | DOB        | gender |
++-----+-----------+------------+--------+
+| 101 | Tharani   | 1998-03-16 | F      |
+| 102 | Thiru     | 1992-05-23 | M      |
+| 103 | Dhakshina | 2006-09-13 | M      |
+| 104 | lakshmi   | 2008-07-06 | F      |
+| 105 | venkat    | 2003-02-16 | M      |
++-----+-----------+------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> create table boat(
+    -> bid int primary key,
+    -> btype varchar(1),
+    -> bname varchar(15) unique,
+    -> color varchar(10),
+    -> check (btype in('D','S')));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> insert into boat values(501,'D','yacht','blue');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into boat values(502,'S','craft','green');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into boat values(503,'D','ferry','white');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into boat values(504,'S','canoe','orange');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into boat values(505,'D','vessel','pink');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from boat;
++-----+-------+--------+--------+
+| bid | btype | bname  | color  |
++-----+-------+--------+--------+
+| 501 | D     | yacht  | blue   |
+| 502 | S     | craft  | green  |
+| 503 | D     | ferry  | white  |
+| 504 | S     | canoe  | orange |
+| 505 | D     | vessel | pink   |
++-----+-------+--------+--------+
+5 rows in set (0.01 sec)
+
+mysql> create table sails(
+    -> sid int ,
+    -> bid int,
+    -> Date_of_trip date,
+    -> shift varchar(2),
+    -> foreign key(sid) references  sailor(sid),
+    -> foreign key(bid) references boat(bid),
+    -> check (shift in('FN','AN')));
+Query OK, 0 rows affected (0.17 sec)
+
+mysql> insert into sails values(101,501,'2023-06-15','AN');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into sails values(102,502,'2023-09-18','FN');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into sails values(103,503,'2023-01-29','AN');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into sails values(104,504,'2023-11-12','FN');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into sails values(105,505,'2023-11-25','AN');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from sail;
+ERROR 1146 (42S02): Table 'moodle_assesment.sail' doesn't exist
+mysql> select * from sails;
++------+------+--------------+-------+
+| sid  | bid  | Date_of_trip | shift |
++------+------+--------------+-------+
+|  101 |  501 | 2023-06-15   | AN    |
+|  102 |  502 | 2023-09-18   | FN    |
+|  103 |  503 | 2023-01-29   | AN    |
+|  104 |  504 | 2023-11-12   | FN    |
+|  105 |  505 | 2023-11-25   | AN    |
++------+------+--------------+-------+
+5 rows in set (0.00 sec)
+

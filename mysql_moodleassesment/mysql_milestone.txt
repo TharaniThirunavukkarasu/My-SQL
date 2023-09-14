@@ -1,0 +1,378 @@
+mysql> CREATE TABLE Person (
+    ->   person_id int auto_increment primary key,
+    ->   pname varchar(50) not null,
+    ->   dob date
+    -> )
+    -> ;
+Query OK, 0 rows affected (0.18 sec)
+
+
+mysql> create table Residency( 
+    -> residence_id int auto_increment primary key,
+    -> person_id int,
+    -> city_id int,
+    -> population int,
+    -> foreign key(person_id) references person (person_id));
+Query OK, 0 rows affected (0.14 sec)
+
+
+
+
+mysql> create table Transport (
+    -> transport_id int auto_increment primary key,
+    -> transport_type varchar(10),
+    -> check (transport_type in ('Bus','Train','Car')));
+Query OK, 0 rows affected (0.10 sec)
+
+
+mysql> create table transport_preference(
+    -> transport_id int,
+    -> person_id int,
+    -> foreign key(transport_id) references transport(transport_id),
+    -> foreign key(person_id) references person(person_id));
+Query OK, 0 rows affected (0.15 sec)
+
+mysql> desc person;
++-----------+--------------+------+-----+---------+----------------+
+| Field     | Type         | Null | Key | Default | Extra          |
++-----------+--------------+------+-----+---------+----------------+
+| person_id | int          | NO   | PRI | NULL    | auto_increment |
+| pname     | varchar(100) | NO   |     | NULL    |                |
+| dob       | date         | YES  |     | NULL    |                |
++-----------+--------------+------+-----+---------+----------------+
+3 rows in set (0.07 sec)
+
+mysql> desc transport;
++----------------+-------------+------+-----+---------+----------------+
+| Field          | Type        | Null | Key | Default | Extra          |
++----------------+-------------+------+-----+---------+----------------+
+| transport_id   | int         | NO   | PRI | NULL    | auto_increment |
+| transport_type | varchar(10) | YES  |     | NULL    |                |
++----------------+-------------+------+-----+---------+----------------+
+2 rows in set (0.01 sec)
+
+mysql> desc transport_preference;
++--------------+------+------+-----+---------+-------+
+| Field        | Type | Null | Key | Default | Extra |
++--------------+------+------+-----+---------+-------+
+| transport_id | int  | YES  | MUL | NULL    |       |
+| person_id    | int  | YES  | MUL | NULL    |       |
++--------------+------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+
+mysql> insert into person values(1,'Tharani','1998-03-16');
+Query OK, 1 row affected (0.14 sec)
+
+mysql> insert into person values(2,'Thiru','1992-08-16');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into person values(3,'lakshmi','1996-05-12');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into person values(4,'Dhakshina','2006-05-22');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into person values(5,'venkat','2008-12-19');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into person values(6,'sriram','2014-12-18');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from person;
++-----------+-----------+------------+
+| person_id | pname     | dob        |
++-----------+-----------+------------+
+|         1 | Tharani   | 1998-03-16 |
+|         2 | Thiru     | 1992-08-16 |
+|         3 | lakshmi   | 1996-05-12 |
+|         4 | Dhakshina | 2006-05-22 |
+|         5 | venkat    | 2008-12-19 |
+|         6 | sriram    | 2014-12-18 |
++-----------+-----------+------------+
+6 rows in set (0.05 sec)
+
+
+mysql> insert into transport values(101,"train");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into transport values(102,"bus");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into transport values(103,"car");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into transport values(104,"train");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into transport values(105,"bus");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into transport values(106,"car");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from transport;
++--------------+----------------+
+| transport_id | transport_type |
++--------------+----------------+
+|          101 | train          |
+|          102 | bus            |
+|          103 | car            |
+|          104 | train          |
+|          105 | bus            |
+|          106 | car            |
++--------------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> insert into transport_preference values(101,1);
+Query OK, 1 row affected (0.07 sec)
+
+
+mysql> insert into transport_preference values(102,2),(103,3),(104,4),(105,5),(106,6);
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from transport_preference;
++--------------+-----------+
+| transport_id | person_id |
++--------------+-----------+
+|          101 |         1 |
+|          102 |         2 |
+|          103 |         3 |
+|          104 |         4 |
+|          105 |         5 |
+|          106 |         6 |
++--------------+-----------+
+6 rows in set (0.00 sec)
+
+mysql> desc residency;
++--------------+------+------+-----+---------+----------------+
+| Field        | Type | Null | Key | Default | Extra          |
++--------------+------+------+-----+---------+----------------+
+| residence_id | int  | NO   | PRI | NULL    | auto_increment |
+| person_id    | int  | YES  | MUL | NULL    |                |
+| city_id      | int  | YES  |     | NULL    |                |
+| population   | int  | YES  |     | NULL    |                |
++--------------+------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> alter table residency add column city_name varchar(20);
+Query OK, 0 rows affected (0.16 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc residency;
++--------------+-------------+------+-----+---------+----------------+
+| Field        | Type        | Null | Key | Default | Extra          |
++--------------+-------------+------+-----+---------+----------------+
+| residence_id | int         | NO   | PRI | NULL    | auto_increment |
+| person_id    | int         | YES  | MUL | NULL    |                |
+| city_id      | int         | YES  |     | NULL    |                |
+| population   | int         | YES  |     | NULL    |                |
+| city_name    | varchar(20) | YES  |     | NULL    |                |
++--------------+-------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+
+mysql> insert into residency values(501,1,1001,89.5,'Melbourne');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into residency values(502,2,1002,99.5,'brisbane');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into residency values(503,3,1003,99.6,'Australia');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into residency values(504,4,1004,78.5,'chicago');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into residency values(505,5,1005,78.5,'newyork');
+Query OK, 1 row affected (0.00 sec)
+
+
+mysql> insert into residency values(506,6,1006,92.9,'london');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from residency;
++--------------+-----------+---------+------------+-----------+
+| residence_id | person_id | city_id | population | city_name |
++--------------+-----------+---------+------------+-----------+
+|          501 |         1 |    1001 |         90 | Melbourne |
+|          502 |         2 |    1002 |        100 | brisbane  |
+|          503 |         3 |    1003 |        100 | Australia |
+|          504 |         4 |    1004 |         79 | chicago   |
+|          505 |         5 |    1005 |         79 | newyork   |
+|          506 |         6 |    1006 |         93 | london    |
++--------------+-----------+---------+------------+-----------+
+6 rows in set (0.00 sec)
+
+mysql> select * from person;
++-----------+-----------+------------+
+| person_id | pname     | dob        |
++-----------+-----------+------------+
+|         1 | Tharani   | 1998-03-16 |
+|         2 | Thiru     | 1992-08-16 |
+|         3 | lakshmi   | 1996-05-12 |
+|         4 | Dhakshina | 2006-05-22 |
+|         5 | venkat    | 2008-12-19 |
+|         6 | sriram    | 2014-12-18 |
++-----------+-----------+------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from transport;
++--------------+----------------+
+| transport_id | transport_type |
++--------------+----------------+
+|          101 | train          |
+|          102 | bus            |
+|          103 | car            |
+|          104 | train          |
+|          105 | bus            |
+|          106 | car            |
++--------------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from transport_preference;
++--------------+-----------+
+| transport_id | person_id |
++--------------+-----------+
+|          101 |         1 |
+|          102 |         2 |
+|          103 |         3 |
+|          104 |         4 |
+|          105 |         5 |
+|          106 |         6 |
++--------------+-----------+
+6 rows in set (0.00 sec)
+
+
+mysql> select count(pname) from person,residency
+    -> where city_name='melbourne'
+    -> group by city_name,person_id;
+ERROR 1052 (23000): Column 'person_id' in group statement is ambiguous
+
+mysql> select count(pname) from person,residency
+    -> where city_name='melbourne'
+    -> group by city_name;
++--------------+
+| count(pname) |
++--------------+
+|            6 |
++--------------+
+1 row in set (0.05 sec)
+
+
+mysql> select count(pname) from person p join residency r
+    -> on p.person_id= r.person_id
+    -> where r.city_name='melbourne';
++--------------+
+| count(pname) |
++--------------+
+|            1 |
++--------------+
+1 row in set (0.00 sec)
+
+
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'on p.person_id=t.person_id
+where t.transport_type='train'' at line 2
+mysql> select p.pname from person p, transport t,transport_preference tp
+    -> inner join transport_preference tp on p.person_id=tp.person_id
+    -> inner join transport t on p.transport_id=t.transport_id
+    -> where t.transport_type='Train';
+ERROR 1066 (42000): Not unique table/alias: 'tp'
+mysql> select p.pname from person p, transport t,transport_preference tp
+    -> inner join transport_preference tp on p.person_id=tp.person_id
+    -> inner join transport t on tp.transport_id=t.transport_id
+    -> where t.transport_type='Train';
+ERROR 1066 (42000): Not unique table/alias: 'tp'
+mysql> select p.pname from person p, transport t
+    -> inner join transport_preference tp on p.person_id=tp.person_id
+    -> inner join transport t on tp.transport_id=t.transport_id
+    -> where t.transport_type='Train';
+ERROR 1066 (42000): Not unique table/alias: 't'
+mysql> select p.person_id ,p.pname,p.dob
+    -> from Person p
+    -> inner join Transport_preference tp on p.person_id = tp.person_id
+    -> inner join Transport t on tp.transport_id = t.transport_id
+    -> where t.transport_type = 'Train';
++-----------+-----------+------------+
+| person_id | pname     | dob        |
++-----------+-----------+------------+
+|         1 | Tharani   | 1998-03-16 |
+|         4 | Dhakshina | 2006-05-22 |
++-----------+-----------+------------+
+2 rows in set (0.17 sec)
+
+
+
+mysql>select p.person_id,p.pname,p.dob
+    -> from person p
+    -> inner join Residency r on  p.person_id = r.person_id
+    -> inner join Transport_preference tp on p.person_id = tp.person_id
+    -> inner join Transport t on tp.transport_id = t.transport_id
+    -> where r.city_name = 'london' and t.transport_type = 'Car';
++-----------+--------+------------+
+| person_id | pname  | dob        |
++-----------+--------+------------+
+|         6 | sriram | 2014-12-18 |
++-----------+--------+------------+
+1 row in set (0.00 sec)
+
+mysql> 
+mysql> select count(*) as total_persons
+    -> from person p
+    -> inner join Residency r on p.person_id = r.person_id
+    -> where r.city_name = 'Brisbane';
++---------------+
+| total_persons |
++---------------+
+|             1 |
++---------------+
+1 row in set (0.04 sec)
+
+
+mysql> select t.transport_type, count(*) AS no_of_people
+    -> from Transport t
+    -> inner join Transport_preference tp on  t.transport_id = tp.transport_id
+    -> group by t.transport_type;
++----------------+--------------+
+| transport_type | no_of_people |
++----------------+--------------+
+| train          |            2 |
+| bus            |            2 |
+| car            |            2 |
++----------------+--------------+
+3 rows in set (0.00 sec)
+
+mysql> select city_name from residency
+    -> where country='Australia'
+    -> order by  population desc;
+ERROR 1054 (42S22): Unknown column 'country' in 'where clause'
+mysql> select city_name from residency
+    -> SELECT t.transport_type, COUNT(*) AS no_of_people;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'SELECT t.transport_type, COUNT(*) AS no_of_people' at line 2
+mysql> select count(*) as no_of cities from residency where population=50000;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'cities from residency where population=50000' at line 1
+mysql> select count(person_id) from residency where population=50000;
++------------------+
+| count(person_id) |
++------------------+
+|                0 |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> select count(person_id) from residency where population>50000;
++------------------+
+| count(person_id) |
++------------------+
+|                0 |
++------------------+
+1 row in set (0.01 sec)
+
+mysql> select person_id from residency where population>50000;
+Empty set (0.00 sec)
+
+mysql> commit
+    -> ;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> Terminal close -- exit!

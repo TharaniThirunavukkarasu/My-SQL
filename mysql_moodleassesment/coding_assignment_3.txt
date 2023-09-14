@@ -1,0 +1,467 @@
+
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| bank               |
+| bank_details       |
+| demo               |
+| e_comerce          |
+| emp_details        |
+| hotel_management   |
+| information_schema |
+| moodle_1           |
+| moodle_assesment   |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+14 rows in set (0.07 sec)
+
+mysql> create database studentprofile;
+Query OK, 1 row affected (0.13 sec)
+
+mysql> use studentprofile;
+Database changed
+
+mysql> create table student_profile(rollno int,name varchar(20),department varchar(20),city varchar(20));
+Query OK, 0 rows affected (0.31 sec)
+
+
+
+mysql> insert into student_profile values(100,'Tharani','CSE','Madurai');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student_profile values( 101,'Thiru','Electrical','Trichy');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student_profile values(102,'Dhakshina','Mechanical','Madurai');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student_profile values( 103,'venkat','civil','chennai');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from student_profile;
++--------+-----------+------------+---------+
+| rollno | name      | department | city    |
++--------+-----------+------------+---------+
+|    100 | Tharani   | CSE        | Madurai |
+|    101 | Thiru     | Electrical | Trichy  |
+|    102 | Dhakshina | Mechanical | Madurai |
+|    103 | venkat    | civil      | chennai |
++--------+-----------+------------+---------+
+4 rows in set (0.00 sec)
+
+mysql> create table marks(rollno int,mark1 int,mark2 int);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into marks values(100,98,96);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into marks values(101,99,92);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into marks values(102,89,96);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into marks values(103,93,97);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from marks;
++--------+-------+-------+
+| rollno | mark1 | mark2 |
++--------+-------+-------+
+|    100 |    98 |    96 |
+|    101 |    99 |    92 |
+|    102 |    89 |    96 |
+|    103 |    93 |    97 |
++--------+-------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table student_profile add  marks int;
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from marks;
++--------+-------+-------+
+| rollno | mark1 | mark2 |
++--------+-------+-------+
+|    100 |    98 |    96 |
+|    101 |    99 |    92 |
+|    102 |    89 |    96 |
+|    103 |    93 |    97 |
++--------+-------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from student_profile;
++--------+-----------+------------+---------+-------+
+| rollno | name      | department | city    | marks |
++--------+-----------+------------+---------+-------+
+|    100 | Tharani   | CSE        | Madurai |  NULL |
+|    101 | Thiru     | Electrical | Trichy  |  NULL |
+|    102 | Dhakshina | Mechanical | Madurai |  NULL |
+|    103 | venkat    | civil      | chennai |  NULL |
++--------+-----------+------------+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table student_profile drop marks;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from student_profile;
++--------+-----------+------------+---------+
+| rollno | name      | department | city    |
++--------+-----------+------------+---------+
+|    100 | Tharani   | CSE        | Madurai |
+|    101 | Thiru     | Electrical | Trichy  |
+|    102 | Dhakshina | Mechanical | Madurai |
+|    103 | venkat    | civil      | chennai |
++--------+-----------+------------+---------+
+4 rows in set (0.00 sec)
+
+mysql> alter table marks add total int;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from marks;
++--------+-------+-------+-------+
+| rollno | mark1 | mark2 | total |
++--------+-------+-------+-------+
+|    100 |    98 |    96 |  NULL |
+|    101 |    99 |    92 |  NULL |
+|    102 |    89 |    96 |  NULL |
+|    103 |    93 |    97 |  NULL |
++--------+-------+-------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table student_profile add  dob date;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from student_profile;
++--------+-----------+------------+---------+------+
+| rollno | name      | department | city    | dob  |
++--------+-----------+------------+---------+------+
+|    100 | Tharani   | CSE        | Madurai | NULL |
+|    101 | Thiru     | Electrical | Trichy  | NULL |
+|    102 | Dhakshina | Mechanical | Madurai | NULL |
+|    103 | venkat    | civil      | chennai | NULL |
++--------+-----------+------------+---------+------+
+4 rows in set (0.00 sec)
+
+mysql> update student_profile set dob='1998-03-16' where name='Tharani';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update student_profile set dob='1993-11-03' where name='Thiru';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update student_profile set dob='2006-04-16' where name='Dhakshina';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update student_profile set dob='2008-09-22' where name='venkat';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from student_profile;
++--------+-----------+------------+---------+------------+
+| rollno | name      | department | city    | dob        |
++--------+-----------+------------+---------+------------+
+|    100 | Tharani   | CSE        | Madurai | 1998-03-16 |
+|    101 | Thiru     | Electrical | Trichy  | 1993-11-03 |
+|    102 | Dhakshina | Mechanical | Madurai | 2006-04-16 |
+|    103 | venkat    | civil      | chennai | 2008-09-22 |
++--------+-----------+------------+---------+------------+
+4 rows in set (0.00 sec)
+
+mysql> alter table student_profile rename column dob to dateofbirth;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from student_profile;
++--------+-----------+------------+---------+-------------+
+| rollno | name      | department | city    | dateofbirth |
++--------+-----------+------------+---------+-------------+
+|    100 | Tharani   | CSE        | Madurai | 1998-03-16  |
+|    101 | Thiru     | Electrical | Trichy  | 1993-11-03  |
+|    102 | Dhakshina | Mechanical | Madurai | 2006-04-16  |
+|    103 | venkat    | civil      | chennai | 2008-09-22  |
++--------+-----------+------------+---------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> desc student_profile;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| rollno      | int         | YES  |     | NULL    |       |
+| name        | varchar(20) | YES  |     | NULL    |       |
+| department  | varchar(20) | YES  |     | NULL    |       |
+| city        | varchar(20) | YES  |     | NULL    |       |
+| dateofbirth | date        | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+5 rows in set (0.05 sec)
+
+mysql> desc marks;
++--------+------+------+-----+---------+-------+
+| Field  | Type | Null | Key | Default | Extra |
++--------+------+------+-----+---------+-------+
+| rollno | int  | YES  |     | NULL    |       |
+| mark1  | int  | YES  |     | NULL    |       |
+| mark2  | int  | YES  |     | NULL    |       |
+| total  | int  | YES  |     | NULL    |       |
++--------+------+------+-----+---------+-------+
+4 rows in set (0.15 sec)
+
+mysql> update marks set total=mark1+mark2  where rollno=100;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update marks set total=mark1+mark2  where rollno=101;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update marks set total=mark1+mark2  where rollno=102;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update marks set total=mark1+mark2  where rollno=103;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from marks;
++--------+-------+-------+-------+
+| rollno | mark1 | mark2 | total |
++--------+-------+-------+-------+
+|    100 |    98 |    96 |   194 |
+|    101 |    99 |    92 |   191 |
+|    102 |    89 |    96 |   185 |
+|    103 |    93 |    97 |   190 |
++--------+-------+-------+-------+
+4 rows in set (0.00 sec)
+
+mysql> delete from marks where rollno=103;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> delete from student_profile where rollno=103;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from marks;
++--------+-------+-------+-------+
+| rollno | mark1 | mark2 | total |
++--------+-------+-------+-------+
+|    100 |    98 |    96 |   194 |
+|    101 |    99 |    92 |   191 |
+|    102 |    89 |    96 |   185 |
++--------+-------+-------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select * from student_profile;
++--------+-----------+------------+---------+-------------+
+| rollno | name      | department | city    | dateofbirth |
++--------+-----------+------------+---------+-------------+
+|    100 | Tharani   | CSE        | Madurai | 1998-03-16  |
+|    101 | Thiru     | Electrical | Trichy  | 1993-11-03  |
+|    102 | Dhakshina | Mechanical | Madurai | 2006-04-16  |
++--------+-----------+------------+---------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> alter table marks add average float;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table marks add grade varchar(5);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+
+mysql> select * from marks;
++--------+-------+-------+-------+---------+-------+
+| rollno | mark1 | mark2 | total | average | grade |
++--------+-------+-------+-------+---------+-------+
+|    100 |    98 |    96 |   194 |    NULL | NULL  |
+|    101 |    99 |    92 |   191 |    NULL | NULL  |
+|    102 |    89 |    96 |   185 |    NULL | NULL  |
++--------+-------+-------+-------+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> update marks set average=total/2  where rollno=101;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update marks set average=total/2  where rollno=100;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update marks set average=total/2  where rollno=102;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from marks;
++--------+-------+-------+-------+---------+-------+
+| rollno | mark1 | mark2 | total | average | grade |
++--------+-------+-------+-------+---------+-------+
+|    100 |    98 |    96 |   194 |      97 | NULL  |
+|    101 |    99 |    92 |   191 |    95.5 | NULL  |
+|    102 |    89 |    96 |   185 |    92.5 | NULL  |
++--------+-------+-------+-------+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> update marks set grade='A' where rollno=100;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update marks set grade='D' where rollno=101;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update marks set grade='B' where rollno=102;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from marks;
++--------+-------+-------+-------+---------+-------+
+| rollno | mark1 | mark2 | total | average | grade |
++--------+-------+-------+-------+---------+-------+
+|    100 |    98 |    96 |   194 |      97 | A     |
+|    101 |    99 |    92 |   191 |    95.5 | D     |
+|    102 |    89 |    96 |   185 |    92.5 | B     |
++--------+-------+-------+-------+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table marks add Total_average float;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+
+mysql> SELECT AVG(total) AS average_marks FROM marks;
++---------------+
+| average_marks |
++---------------+
+|      190.0000 |
++---------------+
+1 row in set (0.01 sec)
+
+mysql> alter table marks drop grade;
+Query OK, 0 rows affected (0.13 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from marks;
++--------+-------+-------+-------+---------+---------------+
+| rollno | mark1 | mark2 | total | average | Total_average |
++--------+-------+-------+-------+---------+---------------+
+|    100 |    98 |    96 |   194 |      97 |          NULL |
+|    101 |    99 |    92 |   191 |    95.5 |          NULL |
+|    102 |    89 |    96 |   185 |    92.5 |          NULL |
++--------+-------+-------+-------+---------+---------------+
+3 rows in set (0.00 sec)
+
+mysql> alter table marks add grade varchar(10);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from grade;
+ERROR 1146 (42S02): Table 'studentprofile.grade' doesn't exist
+mysql> select * from marks;
++--------+-------+-------+-------+---------+---------------+-------+
+| rollno | mark1 | mark2 | total | average | Total_average | grade |
++--------+-------+-------+-------+---------+---------------+-------+
+|    100 |    98 |    96 |   194 |      97 |          NULL | NULL  |
+|    101 |    99 |    92 |   191 |    95.5 |          NULL | NULL  |
+|    102 |    89 |    96 |   185 |    92.5 |          NULL | NULL  |
++--------+-------+-------+-------+---------+---------------+-------+
+3 rows in set (0.00 sec)
+
+mysql> update marks set grade='pass'
+    -> where mark1>=40 and mark2>=40;
+Query OK, 3 rows affected (0.01 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> select * from marks;
++--------+-------+-------+-------+---------+---------------+-------+
+| rollno | mark1 | mark2 | total | average | Total_average | grade |
++--------+-------+-------+-------+---------+---------------+-------+
+|    100 |    98 |    96 |   194 |      97 |          NULL | pass  |
+|    101 |    99 |    92 |   191 |    95.5 |          NULL | pass  |
+|    102 |    89 |    96 |   185 |    92.5 |          NULL | pass  |
++--------+-------+-------+-------+---------+---------------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into marks values(103,35,78);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into marks values(103,35,78,195,93.5);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into marks values(103,35,87,144,65,Null,Null);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select * from marks;
++--------+-------+-------+-------+---------+---------------+-------+
+| rollno | mark1 | mark2 | total | average | Total_average | grade |
++--------+-------+-------+-------+---------+---------------+-------+
+|    100 |    98 |    96 |   194 |      97 |          NULL | pass  |
+|    101 |    99 |    92 |   191 |    95.5 |          NULL | pass  |
+|    102 |    89 |    96 |   185 |    92.5 |          NULL | pass  |
+|    103 |    35 |    87 |   144 |      65 |          NULL | NULL  |
++--------+-------+-------+-------+---------+---------------+-------+
+4 rows in set (0.00 sec)
+
+mysql> update marks set grade='fail'
+    -> where mark1<=40 and mark2<=40;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select * from marks;
++--------+-------+-------+-------+---------+---------------+-------+
+| rollno | mark1 | mark2 | total | average | Total_average | grade |
++--------+-------+-------+-------+---------+---------------+-------+
+|    100 |    98 |    96 |   194 |      97 |          NULL | pass  |
+|    101 |    99 |    92 |   191 |    95.5 |          NULL | pass  |
+|    102 |    89 |    96 |   185 |    92.5 |          NULL | pass  |
+|    103 |    35 |    87 |   144 |      65 |          NULL | NULL  |
++--------+-------+-------+-------+---------+---------------+-------+
+4 rows in set (0.00 sec)
+
+mysql> update marks set grade='fail'
+    -> where mark1<=40 or mark2<=40;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from marks;
++--------+-------+-------+-------+---------+---------------+-------+
+| rollno | mark1 | mark2 | total | average | Total_average | grade |
++--------+-------+-------+-------+---------+---------------+-------+
+|    100 |    98 |    96 |   194 |      97 |          NULL | pass  |
+|    101 |    99 |    92 |   191 |    95.5 |          NULL | pass  |
+|    102 |    89 |    96 |   185 |    92.5 |          NULL | pass  |
+|    103 |    35 |    87 |   144 |      65 |          NULL | fail  |
++--------+-------+-------+-------+---------+---------------+-------+
+4 rows in set (0.00 sec)
+mysql> select * from marks;
++--------+-------+-------+-------+---------+---------------+-------+
+| rollno | mark1 | mark2 | total | average | Total_average | grade |
++--------+-------+-------+-------+---------+---------------+-------+
+|    100 |    98 |    96 |   194 |      97 |          NULL | pass  |
+|    101 |    99 |    92 |   191 |    95.5 |          NULL | pass  |
+|    102 |    89 |    96 |   185 |    92.5 |          NULL | pass  |
+|    103 |    35 |    87 |   144 |      65 |          NULL | fail  |
++--------+-------+-------+-------+---------+---------------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table marks drop average;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from marks;
++--------+-------+-------+-------+---------------+-------+
+| rollno | mark1 | mark2 | total | Total_average | grade |
++--------+-------+-------+-------+---------------+-------+
+|    100 |    98 |    96 |   194 |          NULL | pass  |
+|    101 |    99 |    92 |   191 |          NULL | pass  |
+|    102 |    89 |    96 |   185 |          NULL | pass  |
+|    103 |    35 |    87 |   144 |          NULL | fail  |
++--------+-------+-------+-------+---------------+-------+
+4 rows in set (0.00 sec)

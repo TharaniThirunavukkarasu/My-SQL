@@ -1,0 +1,359 @@
+ mysql> create database moodle_1;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use moodle_1;
+Database changed
+mysql> set autocommit=0;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> tee c:\mysql_moodleassesment\task1.1
+Logging to file 'c:\mysql_moodleassesment\task1.1'
+mysql> create table student(name varchar(15),age int,score int);
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> desc student;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | varchar(15) | YES  |     | NULL    |       |
+| age   | int         | YES  |     | NULL    |       |
+| score | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> create table customer(
+    -> customer_id int,
+    -> first_name varchar(20),
+    -> last_name varchar(20),
+    -> date_of_birth date,
+    -> address varchar(40),
+    -> phone_number bigint;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7
+mysql> create table customer(
+    -> first_name varchar(20),
+    -> last_name varchar(20),
+    -> date_of_birth date,
+    -> address varchar(40),
+    -> phone_number bigint);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc customer;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| first_name    | varchar(20) | YES  |     | NULL    |       |
+| last_name     | varchar(20) | YES  |     | NULL    |       |
+| date_of_birth | date        | YES  |     | NULL    |       |
+| address       | varchar(40) | YES  |     | NULL    |       |
+| phone_number  | bigint      | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> create table order_details(order_id int,custome_id int,order_datetime date,shipped_datetime date,total_amount float);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc order_details;
++------------------+-------+------+-----+---------+-------+
+| Field            | Type  | Null | Key | Default | Extra |
++------------------+-------+------+-----+---------+-------+
+| order_id         | int   | YES  |     | NULL    |       |
+| custome_id       | int   | YES  |     | NULL    |       |
+| order_datetime   | date  | YES  |     | NULL    |       |
+| shipped_datetime | date  | YES  |     | NULL    |       |
+| total_amount     | float | YES  |     | NULL    |       |
++------------------+-------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> insert into order_details values(101,1001,'2023-02-12','2023-02-15',700),
+    -> (102,1002,'2023-12-14','2023-12-19',900),
+    -> (103,1003,'2023-01-25','2023-1-29',400);
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from order_details;
++----------+------------+----------------+------------------+--------------+
+| order_id | custome_id | order_datetime | shipped_datetime | total_amount |
++----------+------------+----------------+------------------+--------------+
+|      101 |       1001 | 2023-02-12     | 2023-02-15       |          700 |
+|      102 |       1002 | 2023-12-14     | 2023-12-19       |          900 |
+|      103 |       1003 | 2023-01-25     | 2023-01-29       |          400 |
++----------+------------+----------------+------------------+--------------+
+3 rows in set (0.00 sec)
+
+mysql> create table player(name varchar(20),age int,score int);
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> insert into player values('Tharani',25,500),('Thiru',29,900),('venkat',19,1000);
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> desc player;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | varchar(20) | YES  |     | NULL    |       |
+| age   | int         | YES  |     | NULL    |       |
+| score | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> select * from player;
++---------+------+-------+
+| name    | age  | score |
++---------+------+-------+
+| Tharani |   25 |   500 |
+| Thiru   |   29 |   900 |
+| venkat  |   19 |  1000 |
++---------+------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insrt into player values('Dhakshina',20,700);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'insrt into player values('Dhakshina',20,700)' at line 1
+mysql> insert into player values('Dhakshina',20,700);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from player;
++-----------+------+-------+
+| name      | age  | score |
++-----------+------+-------+
+| Tharani   |   25 |   500 |
+| Thiru     |   29 |   900 |
+| venkat    |   19 |  1000 |
+| Dhakshina |   20 |   700 |
++-----------+------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from player where name='Tharani';
++---------+------+-------+
+| name    | age  | score |
++---------+------+-------+
+| Tharani |   25 |   500 |
++---------+------+-------+
+1 row in set (0.00 sec)
+
+mysql> insert into player values('sowmiya',19,1500);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> select * from player;
++-----------+------+-------+
+| name      | age  | score |
++-----------+------+-------+
+| Tharani   |   25 |   500 |
+| Thiru     |   29 |   900 |
+| venkat    |   19 |  1000 |
+| Dhakshina |   20 |   700 |
+| sowmiya   |   19 |  1500 |
++-----------+------+-------+
+5 rows in set (0.00 sec)
+
+mysql> update player age=29 where name='venkat';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=29 where name='venkat'' at line 1
+mysql> update player set age=29 where name='venkat';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from player;
++-----------+------+-------+
+| name      | age  | score |
++-----------+------+-------+
+| Tharani   |   25 |   500 |
+| Thiru     |   29 |   900 |
+| venkat    |   29 |  1000 |
+| Dhakshina |   20 |   700 |
+| sowmiya   |   19 |  1500 |
++-----------+------+-------+
+5 rows in set (0.00 sec)
+
+mysql> delete player where name='sowmiya;'
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where name='sowmiya;'' at line 1
+mysql> delete player where name='sowmiya';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where name='sowmiya'' at line 1
+mysql> delete from player where name='sowmiya';
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from player;
++-----------+------+-------+
+| name      | age  | score |
++-----------+------+-------+
+| Tharani   |   25 |   500 |
+| Thiru     |   29 |   900 |
+| venkat    |   29 |  1000 |
+| Dhakshina |   20 |   700 |
++-----------+------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table player add strike_rate float;
+Query OK, 0 rows affected (0.09 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc player;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| name        | varchar(20) | YES  |     | NULL    |       |
+| age         | int         | YES  |     | NULL    |       |
+| score       | int         | YES  |     | NULL    |       |
+| strike_rate | float       | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> update table player set strike_rate=11.20 here name='Tharani';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table player set strike_rate=11.20 here name='Tharani'' at line 1
+
+mysql> create database e_comerce;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> use e_comerce;
+Database changed
+mysql> create table products(name varchar(20),category varchar(20),price float,brand varchar(20),rating float);
+Query OK, 0 rows affected (0.07 sec)
+
+
+mysql> use e_comerce;
+Database changed
+
+
+
+
+mysql> insert into products values('pink_shirt','clothing',900,'puma',4.8);
+Query OK, 1 row affected (0.04 sec)
+
+
+mysql>  insert into products values('blue_jeans','cotton',800,'puma',9.8);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into products values('black_jeans','cotton',900,'otto',6.5);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into products values('bourbon','small',20,'Britania',8.9);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into products values('bourbon','Etra_cookies',50,'Britania',9.7);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into products values('bourbon','choclate',80,'Britania',7.7);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into products values('bourbon','bourbon_cookies',50,'Britania',9.7);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into products values('bourbon','bourbon_crunchy',80,'Britania',8.7);
+Query OK, 1 row affected (0.03 sec)
+
+
+ 
+mysql> insert into products values('chips','potato_chips',40,'lays',8.9);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into products values('chips','finger_chips',60,'lays',7.9);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into products values('chips','spicy_chips',90,'lays',4.9);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into products values('hersheys','Healthy_drink',125,'choclate',8.4);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> select * from products;
++-------------+-----------------+-------+----------+--------+
+| name        | category        | price | brand    | rating |
++-------------+-----------------+-------+----------+--------+
+| pink_shirt  | clothing        |   900 | puma     |    4.8 |
+| blue_jeans  | cotton          |   800 | puma     |    9.8 |
+| black_jeans | cotton          |   900 | otto     |    6.5 |
+| bourbon     | small           |    20 | Britania |    8.9 |
+| bourbon     | Etra_cookies    |    50 | Britania |    9.7 |
+| bourbon     | choclate        |    80 | Britania |    7.7 |
+| bourbon     | bourbon_cookies |    50 | Britania |    9.7 |
+| bourbon     | bourbon_crunchy |    80 | Britania |    8.7 |
+| chips       | potato_chips    |    40 | lays     |    8.9 |
+| chips       | finger_chips    |    60 | lays     |    7.9 |
+| chips       | spicy_chips     |    90 | lays     |    4.9 |
+| hersheys    | Healthy_drink   |   125 | choclate |    8.4 |
++-------------+-----------------+-------+----------+--------+
+12 rows in set (0.00 sec)
+
+mysql> select * from products where brand='puma';
++------------+----------+-------+-------+--------+
+| name       | category | price | brand | rating |
++------------+----------+-------+-------+--------+
+| pink_shirt | clothing |   900 | puma  |    4.8 |
+| blue_jeans | cotton   |   800 | puma  |    9.8 |
++------------+----------+-------+-------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select * from products where name like '%jeans';
++-------------+----------+-------+-------+--------+
+| name        | category | price | brand | rating |
++-------------+----------+-------+-------+--------+
+| blue_jeans  | cotton   |   800 | puma  |    9.8 |
+| black_jeans | cotton   |   900 | otto  |    6.5 |
++-------------+----------+-------+-------+--------+
+2 rows in set (0.05 sec)
+
+mysql> select * from products where category like 'bourbon%';
++---------+-----------------+-------+----------+--------+
+| name    | category        | price | brand    | rating |
++---------+-----------------+-------+----------+--------+
+| bourbon | bourbon_cookies |    50 | Britania |    9.7 |
+| bourbon | bourbon_crunchy |    80 | Britania |    8.7 |
++---------+-----------------+-------+----------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select * from products where name='chips';
++-------+--------------+-------+-------+--------+
+| name  | category     | price | brand | rating |
++-------+--------------+-------+-------+--------+
+| chips | potato_chips |    40 | lays  |    8.9 |
+| chips | finger_chips |    60 | lays  |    7.9 |
+| chips | spicy_chips  |    90 | lays  |    4.9 |
++-------+--------------+-------+-------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select * from products where rating>4.0;
++-------------+-----------------+-------+----------+--------+
+| name        | category        | price | brand    | rating |
++-------------+-----------------+-------+----------+--------+
+| pink_shirt  | clothing        |   900 | puma     |    4.8 |
+| blue_jeans  | cotton          |   800 | puma     |    9.8 |
+| black_jeans | cotton          |   900 | otto     |    6.5 |
+| bourbon     | small           |    20 | Britania |    8.9 |
+| bourbon     | Etra_cookies    |    50 | Britania |    9.7 |
+| bourbon     | choclate        |    80 | Britania |    7.7 |
+| bourbon     | bourbon_cookies |    50 | Britania |    9.7 |
+| bourbon     | bourbon_crunchy |    80 | Britania |    8.7 |
+| chips       | potato_chips    |    40 | lays     |    8.9 |
+| chips       | finger_chips    |    60 | lays     |    7.9 |
+| chips       | spicy_chips     |    90 | lays     |    4.9 |
+| hersheys    | Healthy_drink   |   125 | choclate |    8.4 |
++-------------+-----------------+-------+----------+--------+
+12 rows in set (0.03 sec)
+
+mysql> select * from products where name like 'h_r%';
++----------+---------------+-------+----------+--------+
+| name     | category      | price | brand    | rating |
++----------+---------------+-------+----------+--------+
+| hersheys | Healthy_drink |   125 | choclate |    8.4 |
++----------+---------------+-------+----------+--------+
+1 row in set (0.00 sec)
+
+names ends with atleast 4 characters:
+mysql> select name from products
+    -> where length(substr(name,-4,4))>=4;
++-------------+
+| name        |
++-------------+
+| pink_shirt  |
+| blue_jeans  |
+| black_jeans |
+| bourbon     |
+| bourbon     |
+| bourbon     |
+| bourbon     |
+| bourbon     |
+| chips       |
+| chips       |
+| chips       |
+| hersheys    |
++-------------+

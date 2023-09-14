@@ -1,0 +1,114 @@
+mysql> create table student(name varchar(15),age int,score int);
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> desc student;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | varchar(15) | YES  |     | NULL    |       |
+| age   | int         | YES  |     | NULL    |       |
+| score | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+
+mysql> create table customer(
+    -> first_name varchar(20),
+    -> last_name varchar(20),
+    -> date_of_birth date,
+    -> address varchar(40),
+    -> phone_number bigint);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc customer;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| first_name    | varchar(20) | YES  |     | NULL    |       |
+| last_name     | varchar(20) | YES  |     | NULL    |       |
+| date_of_birth | date        | YES  |     | NULL    |       |
+| address       | varchar(40) | YES  |     | NULL    |       |
+| phone_number  | bigint      | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> create table order_details(order_id int,custome_id int,order_datetime date,shipped_datetime date,total_amount float);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc order_details;
++------------------+-------+------+-----+---------+-------+
+| Field            | Type  | Null | Key | Default | Extra |
++------------------+-------+------+-----+---------+-------+
+| order_id         | int   | YES  |     | NULL    |       |
+| custome_id       | int   | YES  |     | NULL    |       |
+| order_datetime   | date  | YES  |     | NULL    |       |
+| shipped_datetime | date  | YES  |     | NULL    |       |
+| total_amount     | float | YES  |     | NULL    |       |
++------------------+-------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> insert into order_details values(101,1001,'2023-02-12','2023-02-15',700),
+    -> (102,1002,'2023-12-14','2023-12-19',900),
+    -> (103,1003,'2023-01-25','2023-1-29',400);
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from order_details;
++----------+------------+----------------+------------------+--------------+
+| order_id | custome_id | order_datetime | shipped_datetime | total_amount |
++----------+------------+----------------+------------------+--------------+
+|      101 |       1001 | 2023-02-12     | 2023-02-15       |          700 |
+|      102 |       1002 | 2023-12-14     | 2023-12-19       |          900 |
+|      103 |       1003 | 2023-01-25     | 2023-01-29       |          400 |
++----------+------------+----------------+------------------+--------------+
+3 rows in set (0.00 sec)
+
+mysql> create table player(name varchar(20),age int,score int);
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> insert into player values('Tharani',25,500),('Thiru',29,900),('venkat',19,1000);
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> desc player;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | varchar(20) | YES  |     | NULL    |       |
+| age   | int         | YES  |     | NULL    |       |
+| score | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> select * from player;
++---------+------+-------+
+| name    | age  | score |
++---------+------+-------+
+| Tharani |   25 |   500 |
+| Thiru   |   29 |   900 |
+| venkat  |   19 |  1000 |
++---------+------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into player values('Dhakshina',20,700);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from player;
++-----------+------+-------+
+| name      | age  | score |
++-----------+------+-------+
+| Tharani   |   25 |   500 |
+| Thiru     |   29 |   900 |
+| venkat    |   19 |  1000 |
+| Dhakshina |   20 |   700 |
++-----------+------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from player where name='Tharani';
++---------+------+-------+
+| name    | age  | score |
++---------+------+-------+
+| Tharani |   25 |   500 |
++---------+------+-------+
+1 row in set (0.00 sec)
+

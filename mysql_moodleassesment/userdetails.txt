@@ -1,0 +1,56 @@
+mysql> create database kgm;
+Query OK, 1 row affected (0.69 sec)
+
+mysql> use kgm;
+Database changed
+mysql> create table user_details(
+    -> sno int,
+    -> first_name varchar(255),
+    -> last_name varchar(255),
+    -> email varchar(255),
+    -> dob date,
+    -> gender varchar(2),
+    -> phone_number int,
+    -> password varchar(25),
+    -> check(gender in('M','F')));
+Query OK, 0 rows affected (0.54 sec)
+
+mysql> desc user_details;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| sno          | int          | YES  |     | NULL    |       |
+| first_name   | varchar(255) | YES  |     | NULL    |       |
+| last_name    | varchar(255) | YES  |     | NULL    |       |
+| email        | varchar(255) | YES  |     | NULL    |       |
+| dob          | date         | YES  |     | NULL    |       |
+| gender       | varchar(2)   | YES  |     | NULL    |       |
+| phone_number | int          | YES  |     | NULL    |       |
+| password     | varchar(25)  | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+8 rows in set (0.17 sec)
+
+mysql> insert into user_details values(1,'Tharani','Thirunavukkarasu','tharathiru0316@gmail.com','1998-03-16','F',9952847456,'tharathiru123');
+ERROR 1264 (22003): Out of range value for column 'phone_number' at row 1
+mysql> insert into user_details values(1,'Tharani','Thirunavukkarasu','tharathiru0316@gmail.com','1998-03-16','F',8952847456,'tharathiru123');
+ERROR 1264 (22003): Out of range value for column 'phone_number' at row 1
+mysql> insert into user_details values(1,'Tharani','Thirunavukkarasu','tharathiru0316@gmail.com','1998-03-16','F',9284746,'tharathiru123');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into user_details values(2,'Thiru','sivagnanam','thirusivagnam983@gmail.com','1992-11-03','M',9286548,'thirusivagnanam123');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into user_details values(3,'Dhakshina','venkat','dhakshinavenkat234@gmail.com','2006-03-16','M',92865328,'dhakshina12333');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> select * from user_details;
++------+------------+------------------+------------------------------+------------+--------+--------------+--------------------+
+| sno  | first_name | last_name        | email                        | dob        | gender | phone_number | password           |
++------+------------+------------------+------------------------------+------------+--------+--------------+--------------------+
+|    1 | Tharani    | Thirunavukkarasu | tharathiru0316@gmail.com     | 1998-03-16 | F      |      9284746 | tharathiru123      |
+|    2 | Thiru      | sivagnanam       | thirusivagnam983@gmail.com   | 1992-11-03 | M      |      9286548 | thirusivagnanam123 |
+|    3 | Dhakshina  | venkat           | dhakshinavenkat234@gmail.com | 2006-03-16 | M      |     92865328 | dhakshina12333     |
++------+------------+------------------+------------------------------+------------+--------+--------------+--------------------+
+3 rows in set (0.22 sec)
+
+mysql>

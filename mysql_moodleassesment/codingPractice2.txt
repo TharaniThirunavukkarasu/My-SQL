@@ -1,0 +1,213 @@
+mysql> use e_comerce;
+Database changed
+mysql> show tables;
++---------------------+
+| Tables_in_e_comerce |
++---------------------+
+| products            |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> select * from products;
++-------------+-----------------+-------+----------+--------+
+| name        | category        | price | brand    | rating |
++-------------+-----------------+-------+----------+--------+
+| pink_shirt  | clothing        |   900 | puma     |    4.8 |
+| blue_jeans  | cotton          |   800 | puma     |    9.8 |
+| black_jeans | cotton          |   900 | otto     |    6.5 |
+| bourbon     | small           |    20 | Britania |    8.9 |
+| bourbon     | Etra_cookies    |    50 | Britania |    9.7 |
+| bourbon     | choclate        |    80 | Britania |    7.7 |
+| bourbon     | bourbon_cookies |    50 | Britania |    9.7 |
+| bourbon     | bourbon_crunchy |    80 | Britania |    8.7 |
+| chips       | potato_chips    |    40 | lays     |    8.9 |
+| chips       | finger_chips    |    60 | lays     |    7.9 |
+| chips       | spicy_chips     |    90 | lays     |    4.9 |
+| hersheys    | Healthy_drink   |   125 | choclate |    8.4 |
++-------------+-----------------+-------+----------+--------+
+12 rows in set (0.01 sec)
+
+mysql> insert into product values("pant","clothing",300,"puma",3.5);
+ERROR 1146 (42S02): Table 'e_comerce.product' doesn't exist
+mysql> insert into products values("pant","clothing",300,"puma",3.5);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into product values("Tshirt","clothing",200,"Denim",4.5);
+ERROR 1146 (42S02): Table 'e_comerce.product' doesn't exist
+mysql> insert into products values("Tshirt","clothing",200,"Denim",4.5);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into products values("shirt","clothing",200,"Denim",4.2);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into products values("shirt","clothing",200,"Nike",4.2);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into products values("phone","nodes2",200,"Redmi",4.2);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into products values("phone","oneplusm4",200,"oneplus",4.2);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into products values("cake","snacks",20,"cadburry",4.2);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into products values("cake","snacks",50,"britania",4.2);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into products values("shirts","clothing",500,"blackshirts",4.2);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from products;
++-------------+-----------------+-------+-------------+--------+
+| name        | category        | price | brand       | rating |
++-------------+-----------------+-------+-------------+--------+
+| pink_shirt  | clothing        |   900 | puma        |    4.8 |
+| blue_jeans  | cotton          |   800 | puma        |    9.8 |
+| black_jeans | cotton          |   900 | otto        |    6.5 |
+| bourbon     | small           |    20 | Britania    |    8.9 |
+| bourbon     | Etra_cookies    |    50 | Britania    |    9.7 |
+| bourbon     | choclate        |    80 | Britania    |    7.7 |
+| bourbon     | bourbon_cookies |    50 | Britania    |    9.7 |
+| bourbon     | bourbon_crunchy |    80 | Britania    |    8.7 |
+| chips       | potato_chips    |    40 | lays        |    8.9 |
+| chips       | finger_chips    |    60 | lays        |    7.9 |
+| chips       | spicy_chips     |    90 | lays        |    4.9 |
+| hersheys    | Healthy_drink   |   125 | choclate    |    8.4 |
+| pant        | clothing        |   300 | puma        |    3.5 |
+| Tshirt      | clothing        |   200 | Denim       |    4.5 |
+| shirt       | clothing        |   200 | Denim       |    4.2 |
+| shirt       | clothing        |   200 | Nike        |    4.2 |
+| phone       | nodes2          |   200 | Redmi       |    4.2 |
+| phone       | oneplusm4       |   200 | oneplus     |    4.2 |
+| cake        | snacks          |    20 | cadburry    |    4.2 |
+| cake        | snacks          |    50 | britania    |    4.2 |
+| shirts      | clothing        |   500 | blackshirts |    4.2 |
++-------------+-----------------+-------+-------------+--------+
+21 rows in set (0.00 sec)
+
+mysql> select * from products where category="clothing" and price<700;
++--------+----------+-------+-------------+--------+
+| name   | category | price | brand       | rating |
++--------+----------+-------+-------------+--------+
+| pant   | clothing |   300 | puma        |    3.5 |
+| Tshirt | clothing |   200 | Denim       |    4.5 |
+| shirt  | clothing |   200 | Denim       |    4.2 |
+| shirt  | clothing |   200 | Nike        |    4.2 |
+| shirts | clothing |   500 | blackshirts |    4.2 |
++--------+----------+-------+-------------+--------+
+5 rows in set (0.01 sec)
+
+mysql> select * from products where brand="Denim" and rating<4;
+Empty set (0.00 sec)
+
+mysql> select * from products where brand="Denim" and rating>4;
++--------+----------+-------+-------+--------+
+| name   | category | price | brand | rating |
++--------+----------+-------+-------+--------+
+| Tshirt | clothing |   200 | Denim |    4.5 |
+| shirt  | clothing |   200 | Denim |    4.2 |
++--------+----------+-------+-------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select * from products where price<1000 and rating>4;
++-------------+-----------------+-------+-------------+--------+
+| name        | category        | price | brand       | rating |
++-------------+-----------------+-------+-------------+--------+
+| pink_shirt  | clothing        |   900 | puma        |    4.8 |
+| blue_jeans  | cotton          |   800 | puma        |    9.8 |
+| black_jeans | cotton          |   900 | otto        |    6.5 |
+| bourbon     | small           |    20 | Britania    |    8.9 |
+| bourbon     | Etra_cookies    |    50 | Britania    |    9.7 |
+| bourbon     | choclate        |    80 | Britania    |    7.7 |
+| bourbon     | bourbon_cookies |    50 | Britania    |    9.7 |
+| bourbon     | bourbon_crunchy |    80 | Britania    |    8.7 |
+| chips       | potato_chips    |    40 | lays        |    8.9 |
+| chips       | finger_chips    |    60 | lays        |    7.9 |
+| chips       | spicy_chips     |    90 | lays        |    4.9 |
+| hersheys    | Healthy_drink   |   125 | choclate    |    8.4 |
+| Tshirt      | clothing        |   200 | Denim       |    4.5 |
+| shirt       | clothing        |   200 | Denim       |    4.2 |
+| shirt       | clothing        |   200 | Nike        |    4.2 |
+| phone       | nodes2          |   200 | Redmi       |    4.2 |
+| phone       | oneplusm4       |   200 | oneplus     |    4.2 |
+| cake        | snacks          |    20 | cadburry    |    4.2 |
+| cake        | snacks          |    50 | britania    |    4.2 |
+| shirts      | clothing        |   500 | blackshirts |    4.2 |
++-------------+-----------------+-------+-------------+--------+
+20 rows in set (0.00 sec)
+
+mysql> select * from products where price<1000 and rating>3.6and brand="puma";
++------------+----------+-------+-------+--------+
+| name       | category | price | brand | rating |
++------------+----------+-------+-------+--------+
+| pink_shirt | clothing |   900 | puma  |    4.8 |
+| blue_jeans | cotton   |   800 | puma  |    9.8 |
++------------+----------+-------+-------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select * from products where brand="puma" or"Denim" or "Nike";
++------------+----------+-------+-------+--------+
+| name       | category | price | brand | rating |
++------------+----------+-------+-------+--------+
+| pink_shirt | clothing |   900 | puma  |    4.8 |
+| blue_jeans | cotton   |   800 | puma  |    9.8 |
+| pant       | clothing |   300 | puma  |    3.5 |
++------------+----------+-------+-------+--------+
+3 rows in set, 2 warnings (0.00 sec)
+
+mysql> select * from products where brand="puma" and "Denim" and "Nike";
+Empty set, 1 warning (0.00 sec)
+
+mysql> select * from products where brand="redmi" or "oneplus" and rating>4;
++-------+----------+-------+-------+--------+
+| name  | category | price | brand | rating |
++-------+----------+-------+-------+--------+
+| phone | nodes2   |   200 | Redmi |    4.2 |
++-------+----------+-------+-------+--------+
+1 row in set, 1 warning (0.00 sec)
+
+mysql> select * from products where brand in(redmi,onepus) and rating>4;
+ERROR 1054 (42S22): Unknown column 'redmi' in 'where clause'
+mysql> select * from products where brand="redmi,oneplus" and rating>4;
+Empty set (0.00 sec)
+
+mysql> select * from products where brand="redmi or oneplus" and rating>4;
+Empty set (0.00 sec)
+
+mysql> select * from products where brand="cadbury" and "britania" and rating>4;
+Empty set, 1 warning (0.00 sec)
+
+mysql> select * from products where brand="cadbury" or "britania" and rating>4;
+Empty set, 1 warning (0.00 sec)
+
+mysql> select * from products where brand="cadburry" or "britania" and rating>4;
++------+----------+-------+----------+--------+
+| name | category | price | brand    | rating |
++------+----------+-------+----------+--------+
+| cake | snacks   |    20 | cadburry |    4.2 |
++------+----------+-------+----------+--------+
+1 row in set, 1 warning (0.00 sec)
+
+mysql> select * from products where brand="puma" and rating>3.5 or brand="Denim" and rating>4;
++------------+----------+-------+-------+--------+
+| name       | category | price | brand | rating |
++------------+----------+-------+-------+--------+
+| pink_shirt | clothing |   900 | puma  |    4.8 |
+| blue_jeans | cotton   |   800 | puma  |    9.8 |
+| Tshirt     | clothing |   200 | Denim |    4.5 |
+| shirt      | clothing |   200 | Denim |    4.2 |
++------------+----------+-------+-------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select * from products where brand="puma" or "Nike","Levis" and brand="blackshirts";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',"Levis" and brand="blackshirts"' at line 1
+mysql> select * from products where brand="puma" or "Nike" or "Levis" and brand="blackshirts";
++------------+----------+-------+-------+--------+
+| name       | category | price | brand | rating |
++------------+----------+-------+-------+--------+
+| pink_shirt | clothing |   900 | puma  |    4.8 |
+| blue_jeans | cotton   |   800 | puma  |    9.8 |
+| pant       | clothing |   300 | puma  |    3.5 |
++------------+----------+-------+-------+--------+
+3 rows in set, 2 warnings (0.00 sec)
